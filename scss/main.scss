@@ -113,8 +113,8 @@ body {
                 .left,
                 .right {
                     background-color: #000;
-                    width: clamp(3rem, calc(2vw + 3vh), 6rem);
-                    height: clamp(3rem, calc(2vw + 3vh), 6rem);
+                    width: clamp(3rem, calc(3vw + 4vh), 6rem);
+                    height: clamp(3rem, calc(3vw + 4vh), 6rem);
                     display: grid;
                     place-items: center;
                     &:hover {
