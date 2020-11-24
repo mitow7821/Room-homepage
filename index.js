@@ -15,14 +15,14 @@ let content = {
     "Manufactured with the best materials",
   ],
   backgrounds: [
-    "url('/images/desktop-image-hero-1.jpg')",
-    "url('/images/desktop-image-hero-2.jpg')",
-    "url('/images/desktop-image-hero-3.jpg')",
+    "/images/desktop-image-hero-1.jpg",
+    "/images/desktop-image-hero-2.jpg",
+    "/images/desktop-image-hero-3.jpg",
   ],
   backgroundsMobile: [
-    "url('/images/mobile-image-hero-1.jpg')",
-    "url('/images/mobile-image-hero-2.jpg')",
-    "url('/images/mobile-image-hero-3.jpg')",
+    "/images/mobile-image-hero-1.jpg",
+    "/images/mobile-image-hero-2.jpg",
+    "/images/mobile-image-hero-3.jpg",
   ],
   paragraphs: [
     "We provide unmatched quality, comfort, and style for property owners across the country. Our experts combine form and function in bringing your vision to life. Create a room in your own style with our collection and make your property a reflection of you and what you love.",
@@ -30,17 +30,31 @@ let content = {
     "Our modern furniture store provide a high level of quality. Our company has invested in advanced technology to ensure that every product is made as perfect and as consistent as possible. With three decades of experience in this industry, we understand what customers want for their home and office.",
   ],
 };
+let preloadedImages = [];
 
-const changeBackground = () => {
-  if (window.innerWidth <= 800) {
-    dynamicImage.style.backgroundImage =
-      content.backgroundsMobile[actualPosition];
-  } else {
-    dynamicImage.style.backgroundImage = content.backgrounds[actualPosition];
+const preloadImages = (img) => {
+  for (i = 0; i < img.length; i++) {
+    preloadedImages[i] = new Image();
+    preloadedImages[i].src = img[i];
   }
 };
 
-window.onresize = changeBackground;
+function changeBackground() {
+  if (window.innerWidth <= 800) {
+    preloadedImages = [];
+    preloadImages(content.backgroundsMobile);
+    dynamicImage.style.backgroundImage =
+      "url(" + preloadedImages[actualPosition].src + ")";
+  } else {
+    preloadedImages = [];
+    preloadImages(content.backgrounds);
+    dynamicImage.style.backgroundImage =
+      "url(" + preloadedImages[actualPosition].src + ")";
+  }
+}
+changeBackground();
+
+window.addEventListener("resize", changeBackground);
 
 const setActualPosition = function (breakPoint, trueValue, falseValue) {
   if (actualPosition == breakPoint) {
@@ -60,6 +74,7 @@ const setActualPosition = function (breakPoint, trueValue, falseValue) {
     dynamicParagraph.style.opacity = 1;
     dynamicParagraph.innerHTML = content.paragraphs[actualPosition];
   }, 300);
+
   changeBackground();
 };
 
@@ -76,9 +91,9 @@ Array.from(arrows).forEach((actualArrow) => {
 });
 
 document.onkeydown = checkKey;
+
 function checkKey(e) {
   e = e || window.event;
-
   if (e.keyCode == "37") {
     setActualPosition(0, content.headings.length - 1, -1);
   } else if (e.keyCode == "39") {

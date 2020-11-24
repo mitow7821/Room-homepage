@@ -6,11 +6,10 @@
 :root {
     font-size: clamp(16px, calc(0.5vw + 1vh), 25px);
 }
+
 body {
     width: 100%;
-    height: 100vh;
     font-family: "Spartan", sans-serif;
-    // background: url("/design/desktop-design-slide-1.jpg");
 }
 .wrapper {
     height: 100vh;
@@ -25,14 +24,14 @@ body {
             transition: all 0.5s ease-in;
             .mask {
                 position: fixed;
-                background: transparent;
+                background: #00000000;
                 width: 100%;
-                height: 100%;
-                transition: 0.3s;
+                height: 0%;
+                transition: all 0.1s;
                 &.active {
+                    height: 100%;
                     background: #00000070;
                     backdrop-filter: blur(4px);
-                    transition: 0.3s;
                 }
             }
             .menuMobile {
@@ -82,9 +81,9 @@ body {
 
         .top-right {
             position: relative;
-            z-index: -1;
             .dynamic-content {
                 padding: 13vh 0 0 6vw;
+                position: relative;
                 .heading {
                     font-size: 2.3rem;
                     transition: all 0.3s ease-in;
@@ -107,6 +106,7 @@ body {
                     font-weight: 600;
                     color: hsl(0, 0%, 27%);
                     text-decoration: none;
+                    z-index: 0;
                     span {
                         letter-spacing: 0.58rem;
                         margin-right: 2.2rem;
@@ -231,7 +231,7 @@ body {
 }
 @media (max-width: 800px) {
     .wrapper {
-        grid-template-rows: auto auto;
+        grid-template-rows: auto auto !important;
         .top {
             grid-template-columns: 1fr;
             grid-template-rows: 60vh 60vh;
@@ -293,11 +293,10 @@ body {
                         padding: 2.5rem 0;
                         background: #fff;
                         width: 100%;
-                        transition: 0.4s;
+                        transition: 0.3s;
                         &.active {
                             opacity: 1;
                             transform: translateY(0);
-                            transition: 0.4s;
                         }
                         ul {
                             display: flex;
