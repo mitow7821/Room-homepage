@@ -31,7 +31,7 @@ let content = {
   ],
 };
 
-const changeBackground = function () {
+const changeBackground = () => {
   if (window.innerWidth <= 800) {
     dynamicImage.style.backgroundImage =
       content.backgroundsMobile[actualPosition];
